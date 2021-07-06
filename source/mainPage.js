@@ -18,7 +18,6 @@ import {
 } from 'react-native-paper';
 import { baseURL } from '../API/constants';
 import { styles } from './styles/mainCss';
-
 export default MainPage = () => {
     const [listContact, setListContact] = useState([{}]);
     const [id, setId] = useState("");
@@ -147,6 +146,16 @@ export default MainPage = () => {
         fetchAPI();
         setDeleteModalVisible(!deleteModalVisible);
     }
+
+    const detailContact = async (id) => {
+        const response = await fetch(baseURL + "contact/" + id);
+        const responseJson = await response.json();
+        setFirstName(responseJson.data.firstName);
+        setLastName(responseJson.data.lastName);
+        setAge(responseJson.data.age);
+        setPhoto(responseJson.data.photo);
+        setId(responseJson.data.id);
+    };
 
     const itemSeparator = () => {
         return (
